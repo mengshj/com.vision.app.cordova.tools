@@ -13,11 +13,11 @@ import android.util.Log;
 public class Appoperate extends CordovaPlugin {
     
     CordovaInterface cordovaContext = null;
-	public static final String TAG = "AppExit";
+	public static final String TAG = "Appoperate";
 
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-		Log.d(TAG, "initialize() - cordova = " + cordova);
+		Log.d(TAG, "initialize() - cordova: " + cordova);
 		this.cordovaContext = cordova;
 		super.initialize(cordova, webView);
 	}
@@ -25,10 +25,9 @@ public class Appoperate extends CordovaPlugin {
 	@Override
 	public boolean execute(String action, JSONArray args,
 			CallbackContext callbackContext) throws JSONException {
-		Log.d(TAG, "execute() - action = " + action);
+		Log.d(TAG, "execute() - action: " + action);
 		if (action.equals("desktop")) { // action=appoperate
 			String message = args.getString(0);
-			message = message;
 			if (cordovaContext != null) {
 				Log.d(TAG, "execute() - startHome() ");
 				startHome(cordovaContext.getActivity());
@@ -36,7 +35,11 @@ public class Appoperate extends CordovaPlugin {
 			this.sendMsg(message, callbackContext);
 			return true;
 
-		} else {
+		} else if(action.equals("goto")){
+            String message = args.getString(0);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        } else {
 			callbackContext.error("IS Action not appoperate");
 			return false;
 		}
