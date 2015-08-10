@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="com.vision.app.cordova.tools" version="0.0.1">
+	<name>Tools</name>
+	<description>Tools Plugin</description>
+	<license>Apache 2.0</license>
+	<keywords>cordova,tools</keywords>
+
+	<js-module src="www/appTools.js" name="appTools">
+		<clobbers target="appTools" />
+	</js-module>
+	
+	<platform name="android">
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="Appoperate">
+				<param name="android-package" value="com.vision.app.cordova.utils.Appoperate" />
+			</feature>
+		</config-file>
+
+		<config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+		</config-file>
+		
+		<source-file src="src/android/Appoperate.java" target-dir="src/com/vision/app/cordova/utils" />
+	</platform>
+	
+	<platform name="ios">
+		<config-file target="config.xml" parent="/*">
+			<feature name="Appoperate">
+				<param name="ios-package" value="CDVLogin"/>
+				<param name="onload" value="true" />
+			</feature>
+		</config-file>
+		<header-file src="src/ios/CDVLogin.h" />
+		<source-file src="src/ios/CDVLogin.m" />
+	</platform>
+</plugin>
