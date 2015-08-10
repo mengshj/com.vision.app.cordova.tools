@@ -10,6 +10,8 @@ import org.json.JSONException;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+
+import com.vision.app.test.LoginActivity;
 public class Appoperate extends CordovaPlugin {
     
     CordovaInterface cordovaContext = null;
@@ -34,11 +36,11 @@ public class Appoperate extends CordovaPlugin {
 			}
 			this.sendMsg(message, callbackContext);
 			return true;
-
 		} else if(action.equals("goto")){
             String message = args.getString(0);
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(cordovaContext.getActivity(), LoginActivity.class);
+            cordovaContext.getActivity().startActivity(intent);
+            return false;
         } else {
 			callbackContext.error("IS Action not appoperate");
 			return false;
